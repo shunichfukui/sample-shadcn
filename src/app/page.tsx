@@ -1,103 +1,454 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Search, MapPin, Star, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="rounded-md bg-primary p-1">
+              <TrendingUp className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <span className="text-xl font-bold">PokerSpots</span>
+          </Link>
+          <nav className="hidden md:flex gap-6 text-sm">
+            <Link href="/" className="font-medium">
+              Home
+            </Link>
+            <Link href="/venues" className="font-medium">
+              Venues
+            </Link>
+            <Link href="/leaderboard" className="font-medium">
+              Leaderboard
+            </Link>
+            <Link href="/about" className="font-medium">
+              About
+            </Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" className="hidden md:flex">
+              Sign In
+            </Button>
+            <Button size="sm">Sign Up</Button>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-6 w-6"
+              >
+                <line x1="4" x2="20" y1="12" y2="12" />
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+            </Button>
+          </div>
         </div>
+      </header>
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10" />
+          <div
+            className="h-[500px] bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/placeholder.svg?height=500&width=1200')",
+            }}
+          />
+          <div className="container absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+              Find Your Perfect Poker Spot
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg sm:text-xl">
+              Discover, review, and share the best poker venues in your area
+            </p>
+            <div className="mt-8 w-full max-w-md">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search for poker venues..."
+                  className="pl-10 bg-white/90 text-black placeholder:text-gray-500"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Venues */}
+        <section className="container py-12">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Featured Venues
+            </h2>
+            <Link href="/venues" className="text-primary hover:underline">
+              View all venues
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredVenues.map((venue) => (
+              <Link href={`/venues/${venue.id}`} key={venue.id}>
+                <Card className="overflow-hidden h-full transition-all hover:shadow-md">
+                  <div className="aspect-video relative">
+                    <div className="absolute top-2 right-2 z-10">
+                      <Badge
+                        variant="secondary"
+                        className="bg-black/70 text-white hover:bg-black/70"
+                      >
+                        {venue.category}
+                      </Badge>
+                    </div>
+                    <img
+                      src={venue.image || "/placeholder.svg"}
+                      alt={venue.name}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="font-bold text-lg line-clamp-1">
+                          {venue.name}
+                        </h3>
+                        <div className="flex items-center text-sm text-muted-foreground mt-1">
+                          <MapPin className="h-4 w-4 mr-1" />
+                          <span>{venue.location}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center bg-primary/10 px-2 py-1 rounded-md">
+                        <Star className="h-4 w-4 text-primary fill-primary mr-1" />
+                        <span className="font-medium">{venue.rating}</span>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                      {venue.description}
+                    </p>
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">${venue.minBuy}</span>
+                        <span className="text-muted-foreground">
+                          {" "}
+                          min buy-in
+                        </span>
+                      </div>
+                      <div className="flex -space-x-2">
+                        {[1, 2, 3].map((i) => (
+                          <Avatar
+                            key={i}
+                            className="h-6 w-6 border-2 border-background"
+                          >
+                            <AvatarFallback className="text-[10px]">
+                              U{i}
+                            </AvatarFallback>
+                          </Avatar>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Categories */}
+        <section className="bg-muted/50 py-12">
+          <div className="container">
+            <h2 className="text-3xl font-bold tracking-tight mb-8">
+              Browse by Category
+            </h2>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {categories.map((category) => (
+                <Link href={`/category/${category.slug}`} key={category.name}>
+                  <div className="bg-background rounded-lg p-4 text-center transition-all hover:shadow-md hover:bg-primary/5">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                      {category.icon}
+                    </div>
+                    <h3 className="font-medium">{category.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {category.count} venues
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Top Reviewers */}
+        <section className="container py-12">
+          <h2 className="text-3xl font-bold tracking-tight mb-8">
+            Top Reviewers
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {topReviewers.map((reviewer) => (
+              <Card key={reviewer.id} className="overflow-hidden">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage
+                        src={reviewer.avatar || "/placeholder.svg"}
+                        alt={reviewer.name}
+                      />
+                      <AvatarFallback>{reviewer.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h3 className="font-medium">{reviewer.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {reviewer.reviews} reviews
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between text-sm">
+                    <div className="flex items-center">
+                      <Star className="h-4 w-4 text-primary fill-primary mr-1" />
+                      <span>{reviewer.avgRating} avg rating</span>
+                    </div>
+                    <Badge variant="outline" className="font-normal">
+                      {reviewer.level}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link href="/leaderboard">
+              <Button variant="outline">View Full Leaderboard</Button>
+            </Link>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="border-t py-6 md:py-8">
+        <div className="container flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-2">
+            <div className="rounded-md bg-primary p-1">
+              <TrendingUp className="h-4 w-4 text-primary-foreground" />
+            </div>
+            <span className="font-semibold">PokerSpots</span>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} PokerSpots. All rights reserved.
+          </p>
+          <nav className="flex gap-4 text-sm text-muted-foreground">
+            <Link href="/terms" className="hover:underline">
+              Terms
+            </Link>
+            <Link href="/privacy" className="hover:underline">
+              Privacy
+            </Link>
+            <Link href="/contact" className="hover:underline">
+              Contact
+            </Link>
+          </nav>
+        </div>
       </footer>
     </div>
   );
 }
+
+// Sample data
+const featuredVenues = [
+  {
+    id: "1",
+    name: "The Royal Flush Club",
+    location: "Las Vegas, NV",
+    description:
+      "Upscale poker room with professional dealers and premium amenities. Regular tournaments and high-stakes games.",
+    image: "/placeholder.svg?height=200&width=300",
+    category: "Casino",
+    rating: 4.8,
+    minBuy: 100,
+  },
+  {
+    id: "2",
+    name: "Downtown Poker Lounge",
+    location: "Chicago, IL",
+    description:
+      "Casual atmosphere with daily tournaments and cash games. Great for beginners and experienced players alike.",
+    image: "/placeholder.svg?height=200&width=300",
+    category: "Card Room",
+    rating: 4.5,
+    minBuy: 50,
+  },
+  {
+    id: "3",
+    name: "High Stakes Poker Club",
+    location: "Atlantic City, NJ",
+    description:
+      "Exclusive membership club featuring premium tables, private rooms, and professional service.",
+    image: "/placeholder.svg?height=200&width=300",
+    category: "Private Club",
+    rating: 4.9,
+    minBuy: 200,
+  },
+];
+
+const categories = [
+  {
+    name: "Casinos",
+    slug: "casinos",
+    count: 42,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M2 20h20" />
+        <path d="M5 20V8.2a1 1 0 0 1 .4-.8l7-5.2a1 1 0 0 1 1.2 0l7 5.2a1 1 0 0 1 .4.8V20" />
+        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Card Rooms",
+    slug: "card-rooms",
+    count: 28,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2" />
+        <path d="M7 7h.01" />
+        <path d="M17 17h.01" />
+        <path d="M7 17h.01" />
+        <path d="M17 7h.01" />
+      </svg>
+    ),
+  },
+  {
+    name: "Private Clubs",
+    slug: "private-clubs",
+    count: 15,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+        <path d="M8 14.5c0 1.4.6 2.7 1.5 3.7" />
+        <path d="M15 14.5c1.1 0 2.1.3 3 .7" />
+        <path d="M16.5 19.8c0-1.5-2-2.8-4.5-2.8s-4.5 1.3-4.5 2.8" />
+      </svg>
+    ),
+  },
+  {
+    name: "Home Games",
+    slug: "home-games",
+    count: 36,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+  },
+  {
+    name: "Tournaments",
+    slug: "tournaments",
+    count: 23,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+      >
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+      </svg>
+    ),
+  },
+];
+
+const topReviewers = [
+  {
+    id: "1",
+    name: "Alex Johnson",
+    avatar: "/placeholder.svg?height=40&width=40",
+    reviews: 87,
+    avgRating: 4.2,
+    level: "Diamond Reviewer",
+  },
+  {
+    id: "2",
+    name: "Sarah Miller",
+    avatar: "/placeholder.svg?height=40&width=40",
+    reviews: 64,
+    avgRating: 4.5,
+    level: "Platinum Reviewer",
+  },
+  {
+    id: "3",
+    name: "Mike Chen",
+    avatar: "/placeholder.svg?height=40&width=40",
+    reviews: 52,
+    avgRating: 4.1,
+    level: "Gold Reviewer",
+  },
+  {
+    id: "4",
+    name: "Jessica Lee",
+    avatar: "/placeholder.svg?height=40&width=40",
+    reviews: 41,
+    avgRating: 4.3,
+    level: "Gold Reviewer",
+  },
+];
