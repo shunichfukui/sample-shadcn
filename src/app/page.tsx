@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search, MapPin, Star, TrendingUp } from "lucide-react";
+import { Search, MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -9,54 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="rounded-md bg-primary p-1">
-              <TrendingUp className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold">PokerSpots</span>
-          </Link>
-          <nav className="hidden md:flex gap-6 text-sm">
-            <Link href="/" className="font-medium">
-              Home
-            </Link>
-            <Link href="/venues" className="font-medium">
-              Venues
-            </Link>
-            <Link href="/leaderboard" className="font-medium">
-              Leaderboard
-            </Link>
-            <Link href="/about" className="font-medium">
-              About
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" className="hidden md:flex">
-              Sign In
-            </Button>
-            <Button size="sm">Sign Up</Button>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
-              >
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
-            </Button>
-          </div>
-        </div>
-      </header>
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative">
@@ -230,30 +182,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="border-t py-6 md:py-8">
-        <div className="container flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-2">
-            <div className="rounded-md bg-primary p-1">
-              <TrendingUp className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-semibold">PokerSpots</span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} PokerSpots. All rights reserved.
-          </p>
-          <nav className="flex gap-4 text-sm text-muted-foreground">
-            <Link href="/terms" className="hover:underline">
-              Terms
-            </Link>
-            <Link href="/privacy" className="hover:underline">
-              Privacy
-            </Link>
-            <Link href="/contact" className="hover:underline">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }
