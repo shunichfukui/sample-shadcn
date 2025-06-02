@@ -8,8 +8,8 @@ import Footer from "../components/layout/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "PokerSpots - Find Your Perfect Poker Venue",
-  description: "Discover, review, and share the best poker venues in your area",
+  title: "PokerSpots - Find Your Perfect Poker Shop",
+  description: "Discover, review, and share the best poker Shops in your area",
 };
 
 export default function RootLayout({

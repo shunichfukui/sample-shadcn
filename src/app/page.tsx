@@ -24,13 +24,13 @@ export default function Home() {
               Find Your Perfect Poker Spot
             </h1>
             <p className="mt-4 max-w-2xl text-lg sm:text-xl">
-              Discover, review, and share the best poker venues in your area
+              Discover, review, and share the best poker shop in your area
             </p>
             <div className="mt-8 w-full max-w-md">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
-                  placeholder="Search for poker venues..."
+                  placeholder="Search for poker shop..."
                   className="pl-10 bg-white/90 text-black placeholder:text-gray-500"
                 />
               </div>
@@ -38,19 +38,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Featured Venues */}
+        {/* Featured shop */}
         <section className="container py-12">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Featured Venues
-            </h2>
-            <Link href="/venues" className="text-primary hover:underline">
-              View all venues
+            <h2 className="text-3xl font-bold tracking-tight">Featured shop</h2>
+            <Link href="/shop" className="text-primary hover:underline">
+              View all shop
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredVenues.map((venue) => (
-              <Link href={`/venues/${venue.id}`} key={venue.id}>
+            {featuredShop.map((shop) => (
+              <Link href={`/shops/${shop.id}`} key={shop.id}>
                 <Card className="overflow-hidden h-full transition-all hover:shadow-md">
                   <div className="aspect-video relative">
                     <div className="absolute top-2 right-2 z-10">
@@ -58,12 +56,12 @@ export default function Home() {
                         variant="secondary"
                         className="bg-black/70 text-white hover:bg-black/70"
                       >
-                        {venue.category}
+                        {shop.category}
                       </Badge>
                     </div>
                     <img
-                      src={venue.image || "/placeholder.svg"}
-                      alt={venue.name}
+                      src={shop.image || "/placeholder.svg"}
+                      alt={shop.name}
                       className="object-cover w-full h-full"
                     />
                   </div>
@@ -71,24 +69,24 @@ export default function Home() {
                     <div className="flex items-start justify-between">
                       <div>
                         <h3 className="font-bold text-lg line-clamp-1">
-                          {venue.name}
+                          {shop.name}
                         </h3>
                         <div className="flex items-center text-sm text-muted-foreground mt-1">
                           <MapPin className="h-4 w-4 mr-1" />
-                          <span>{venue.location}</span>
+                          <span>{shop.location}</span>
                         </div>
                       </div>
                       <div className="flex items-center bg-primary/10 px-2 py-1 rounded-md">
                         <Star className="h-4 w-4 text-primary fill-primary mr-1" />
-                        <span className="font-medium">{venue.rating}</span>
+                        <span className="font-medium">{shop.rating}</span>
                       </div>
                     </div>
                     <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                      {venue.description}
+                      {shop.description}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <div className="text-sm">
-                        <span className="font-medium">${venue.minBuy}</span>
+                        <span className="font-medium">${shop.minBuy}</span>
                         <span className="text-muted-foreground">
                           {" "}
                           min buy-in
@@ -129,7 +127,7 @@ export default function Home() {
                     </div>
                     <h3 className="font-medium">{category.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      {category.count} venues
+                      {category.count} shop
                     </p>
                   </div>
                 </Link>
@@ -187,7 +185,7 @@ export default function Home() {
 }
 
 // Sample data
-const featuredVenues = [
+const featuredShop = [
   {
     id: "1",
     name: "The Royal Flush Club",
